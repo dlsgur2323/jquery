@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="../css/public.css" rel="stylesheet">
+		<script src="../js/jquery-3.5.1.min.js"></script>
+		<script>
+			$(function(){
+				$(".box1 input:button").on("click", function(){
+// 					jQuery가 포함된 span태그 의 테두리 파랑 : 
+					$("span:contains(jQuery)").css("border", "2px solid blue");
+// 					jQuery가 포함되지 않은 span 태그 의 테두리 빨강  : 
+					$("span:not(:contains(jQuery))").css("border", "2px solid red")
+// 					span을 갖는 div요소 태그 의 테두리   그린
+					$("#result1 div:has(span)").css("border", "10px solid orange")
+// 					아무것도 없는 빈 div 태그 의 테두리      
+					$("#result1 div:empty").css("border","2px solid orange");
+// 					div 후손 span 태그 의 글자색  빨강, 크기,굵게
+					$("#result1 div span").css("color","red").css("font-weight","bold").css("font-size", "1.1em");
+				})
+			})
+		</script>
+		<style type="text/css">
+        	#result1 div{
+        		width:600px;
+        		height:30px; 
+            	border:1px solid green; 
+            	margin : 10px;
+            }
+		</style>
+	</head>
+	<body>
+		
+		<div class="box box1">
+			<h3>내용필터</h3>
+ 					jQuery가 포함된 span태그 의 테두리 파랑 :<br> 
+					$("span:contains(jQuery)").css("border", "2px solid blue");<br>
+					jQuery가 포함되지 않은 span 태그 의 테두리 빨강  : <br>
+					$("span:not(:contains(jQuery))").css("border", "2px solid red")<br>
+					span을 갖는 div요소 태그 의 테두리   그린<br>
+					$("#result1 div:has(span)").css("border", "10px solid orange")<br>
+					아무것도 없는 빈 div 태그 의 테두리      <br>
+					$("#result1 div:empty").css("border","2px solid orange");<br>
+					div 후손 span 태그 의 글자색  빨강, 크기,굵게<br>
+					$("#result1 div span").css("color","red").css("font-weight","bold").css("font-size", "1.1em");<br>
+				})
+			<input type="button" value="확인">
+			<div id="result1">
+				<div></div>
+				<div>헬로우~~
+					<span>오늘도  즐겁게~열심히!</span>
+				</div>
+				<p>Hello jQuery! <span>Thanks, jQuery!</span></p>
+				<div class="myClass">jQuery!</div>
+				<span class="notMyClass">쉬운 jQuery~~!</span>
+				<div></div>
+				<br><br>
+			</div>
+		</div> 
+		
+	</body>
+</html>

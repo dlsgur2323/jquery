@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="../css/public.css" rel="stylesheet">
+		<script src="../js/jquery-3.5.1.min.js"></script>
+		<script>
+			$(function(){
+// 				$("input[value=보이기]").css("display", "none");
+// 				$("input[value=보이기]").hide();
+				$("h1").on("click", function(){
+					$(this).hide();
+					//보여지는 h1의 갯수가 0이면 버튼을 보이게 한다.
+					if($("h1:visible").length < 1 ){
+						$("input[value=보이기]").show();
+					}
+					
+				})
+				$("input[value=보이기]").on("click", function(){
+					$("h1:hidden").show();
+					$("input[value=보이기]").hide();
+				})
+				
+				
+				$("input[value=hidden]").on("click", function(){
+					res = "";
+					$(".box2 p:hidden").each(function(){
+						res += $(this).text() + "<br>";
+					})
+					$("#result2").html(res)
+					
+				})
+				
+				$("input[value=visible]").on("click", function(){
+					res = "";
+					$(".box2 p:visible").each(function(){
+						res += $(this).text() + "<br>";
+					})
+					$("#result3").html(res)
+					
+				})
+				
+				
+			})
+		</script>
+		<style>
+			input[value=보이기]{
+				display : none;
+			}
+			.box2 div {
+				border : 1px dotted orange;
+				height : auto;
+				padding : 10px;
+				margin : 5px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="box box1">
+			<h3>기타필터</h3>
+			:visible : 보여지는 상태<br>
+			:hidden : 감춰진 상태<br>
+			<input type="button" value="보이기">
+			<div id="result1">
+				<h1>클릭하면 사라집니다1</h1>
+				<h1>클릭하면 사라집니다2</h1>
+				<h1>클릭하면 사라집니다3</h1>
+				<h1>클릭하면 사라집니다4</h1>
+				<h1>클릭하면 사라집니다5</h1>
+				<h1>클릭하면 사라집니다6</h1>
+				<h1>클릭하면 사라집니다7</h1>
+				<h1>클릭하면 사라집니다8</h1>
+				<h1>클릭하면 사라집니다9</h1>
+				<h1>클릭하면 사라집니다10</h1>
+			</div>
+			
+		</div> 
+		
+		<div class="box box2">
+			<h3>기타필터</h3>
+			:visible : 보여지는 상태<br>
+			:hidden : 감춰진 상태<br>
+			<p>보이는 문단</p>
+			<p style="visibility: hidden;">숨겨진 문단</p>
+			<p style="display: none;">자리를 차지 하지 못한 문단</p>
+			<p style="opacity: 0;">투명한 문단</p>
+			<hr>
+			<input type="button" value="hidden">
+			<input type="button" value="visible">
+			<div id="result2">
+				
+			</div>
+			<div id="result3">
+				
+			</div>
+			
+		</div> 
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

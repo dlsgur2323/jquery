@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="../css/public.css" rel="stylesheet">
+		<script src="../js/jquery-3.5.1.min.js"></script>
+		<script>
+			$(function(){
+				$("input[value=add]").on("click", function(){
+					$(".pp").addClass("backcolor");
+				})
+				$("input[value=remove]").on("click", function(){
+					$(".pp").removeClass("backcolor");
+				})
+				$("input[value=has]").on("click", function(){
+					a = $(".pp").hasClass("backcolor");
+					if(a){
+						$(".pp").removeClass("backcolor");
+					} else {
+						$(".pp").addClass("backcolor");
+					}
+				})
+				$("input[value=toggle]").on("click", function(){
+					$(".pp").toggleClass("backcolor");
+				})
+				
+				$(".pp2").on("click", function(){
+					$(this).toggleClass("backcolor");
+				})
+				$(".pp3").on("mouseover", function(){
+					$(this).addClass("backcolor");
+				})
+				$(".pp3").on("mouseout", function(){
+					$(this).removeClass("backcolor");
+				})
+				
+				
+			})
+		</script>
+		<style>
+			.backcolor {
+				background : lightgreen;
+			}	
+		</style>		
+	</head>
+	<body>
+		
+		<div class="box">
+			<h3>스타일 추가 삭제</h3>
+			추가 할 스타일을 &lt;style&gt;에 정의한다.<br>
+			스크립트에서 동적으로 스타일을 추가하거나 삭제한다.
+			addClass("class이름")<br>
+			removeClass("class이름")<br>
+			hasClass("class이름")<br>
+			toggleClass("class이름")<br><br>
+			
+			<p id="p1" class="pp">어어어어제는 하루 종일
+									비이이가아아내렸어어
+									아아아득하게 내려앉은 먼지 사이로오오
+									귀이잇가에 은은~하게~
+									우우울려 퍼지이느으은
+									그드드애음성 빗속으로
+									사라져 버려러어어어ㅓ
+									때론 눈물도 흐~르겠지~ 그으리이움으 로오오오
+									때론 가슴도 저어어리겠지~~</p>
+			<p id="p2" class="pp">고단한 하루가 끝나지~ 않는 이미 늦은 저녁
+									전화기너머 들리는 니웃음소리~ 난 다시 일어날 수 있어~~
+									아직~ 내겐~ 우우우우우~~ 너라는 선물이 있으니까~
+									아직~ 이 황량한 세상속에~ 너는 내 곁에 있어주니까~
+									</p>
+			
+			<input type="button" value="add">
+			<input type="button" value="remove">
+			<input type="button" value="has">
+			<input type="button" value="toggle">
+			<div id="result1"></div>
+		</div>
+		 
+		<div class="box">
+			<h3>스타일 추가 삭제</h3>
+			p태그를 클릭할때마다 toggleClass가 실행된다.<br>
+			<p id="p3" class="pp2">퇴근 시간 전에는 시간이 너무 느리~게 가아는데
+									왜 집에만 오오오면 시간이 너무 빨라아아서
+									아쉬워어~ 제대로~~ 못쉬고오오오오오오
+									평일 일과 중에는 시간이 너무 느리~~게 가아아는데
+									왜 주말만 되에에면 시간이 너무 빨라아아서
+									아쉬워어~ 제대로~ 못자고오오오오오오오오오~~</p>
+			<p id="p4" class="pp2">고단한 하루가 끝나지~ 않는 이미 늦은 저녁
+									전화기너머 들리는 니웃음소리~ 난 다시 일어날 수 있어~~
+									아직~ 내겐~ 우우우우우~~ 너라는 선물이 있으니까~
+									아직~ 이 황량한 세상속에~ 너는 내 곁에 있어주니까~
+									</p>
+		</div>
+		 
+		<div class="box">
+			<h3>스타일 추가 삭제</h3>
+			p태그에 마우스over시 addClass.<br>
+			마우스 out시에 removeClass가 실행된다. <br>
+			<p class="pp3">퇴근 시간 전에는 시간이 너무 느리~게 가아는데
+									왜 집에만 오오오면 시간이 너무 빨라아아서
+									아쉬워어~ 제대로~~ 못쉬고오오오오오오
+									평일 일과 중에는 시간이 너무 느리~~게 가아아는데
+									왜 주말만 되에에면 시간이 너무 빨라아아서
+									아쉬워어~ 제대로~ 못자고오오오오오오오오오~~</p>
+			<p class="pp3">비가내리고~~ 음악이흐르면~~ 난 당신을~~~ 생~각해요~오
+							당신~ 이 떠나시던 그 밤에~ 이렇게 비가 왔어요오~
+							난 오늘도~ 이 비를 마아아즈며어어 하루를 그냥 보내요오오오 
+							오~ 아름다우운 으으음악 가튼~ 우리이이이의~~ 사랑의 이이이이야기 드으으른
+							흐르느으은 비처럼 너어어 무 아아아 프으으 기이이 때 무 니 죠오오오오~
+									</p>
+		</div> 
+		
+	</body>
+</html>
+

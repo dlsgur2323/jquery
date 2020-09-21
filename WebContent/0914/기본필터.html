@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="../css/public.css" rel="stylesheet">
+		<script src="../js/jquery-3.5.1.min.js"></script>
+		<script>
+			$(function(){
+				$(".box1 input:button").on("click", function(){
+					$("li:first, li:last").css("background", "yellow");
+					$("li:eq(5)").css("background", "red");
+					$("li:lt(4)").css({"font-size" : "1.3em", "font-weight" : "bold"});
+				})
+				
+				$(".box2 input:button").on("click", function(){
+					$("tr:even").css("background", "lightgrey");
+					$("tr:odd").css("background", "lightblue");
+					$("tr:first").css({"background" : "black", "color" : "white"});
+				})
+				
+			})
+		</script>
+		<style>
+			td{
+				width : 300px;
+				height : 40px;
+				padding : 10px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="box box1">
+			<h3>기본필터</h3>
+			:first<br>
+			:last<br>
+			:eq(5)<br>
+			:lt(4)<br>
+			<input type="button" value="확인">
+			<div id="result1">
+				<ul>
+					<li>one</li>
+					<li>two</li>
+					<li>three</li>
+					<li>four</li>
+					<li>five</li>
+					<li>six</li>
+					<li>seven</li>
+					<li>eight</li>
+					<li>nine</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="box box2">
+			<h3>기본필터</h3>
+			:even : 짝수<br>
+			:odd : 홀수<br>
+			<input type="button" value="확인">
+			<div id="result2">
+				<table border="1">
+					<tr>
+						<td>이름</td>
+						<td>번호</td>
+					</tr>
+					<tr>
+						<td>ONE</td>
+						<td>34</td>
+					</tr>
+					<tr>
+						<td>TWO</td>
+						<td>99</td>
+					</tr>
+					<tr>
+						<td>THREE</td>
+						<td>15</td>
+					</tr>
+					<tr>
+						<td>FOUR</td>
+						<td>46</td>
+					</tr>
+					<tr>
+						<td>FIVE</td>
+						<td>75</td>
+					</tr>
+					<tr>
+						<td>SIX</td>
+						<td>83</td>
+					</tr>
+					<tr>
+						<td>SEVEN</td>
+						<td>15</td>
+					</tr>
+					<tr>
+						<td>EIGHT</td>
+						<td>41</td>
+					</tr>
+					<tr>
+						<td>NINE</td>
+						<td>58</td>
+					</tr>
+					<tr>
+						<td>TEN</td>
+						<td>64</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		 
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

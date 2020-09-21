@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="../css/public.css" rel="stylesheet">
+		<script src ="../js/jquery-3.5.1.min.js"></script>
+		<script>
+			$(function(){
+				$(".box1 input[type=button]").on("click",function(){
+					ptag = $("<p id='p1' onclick='proc1(this)'>Hello</p>")
+					
+					$("#result1").append(ptag);
+				})
+				
+				$(".box2 input[type=button]").on("click", function(){
+					ptag = $("<p></p>", {
+						'id' : 'p2',
+						'text' : 'Hello',
+						'click' : function(){
+							$(this).css("font-size","+=5px");							
+						}
+					});
+					$("#result2").append(ptag);
+					
+				})
+				
+				$(".box3 input[type=button]").on("click", function(){
+					$("<img>", {
+						"src" :	"../images/공유.jpg",
+						"width" : "200px",
+						"height" : "200px",
+						"click" : function(){
+							$(this).css("border","2px solid red");
+						}
+					}).appendTo("#result3");
+				})
+				
+			})
+			function proc1(tt){
+				$(tt).css("font-size", "+=5px");
+			}
+		</script>
+	</head>
+	<body>
+		
+		<div class="box box1">
+			<h3>새로운 태그 생성</h3>
+			확인 버튼 클릭하면 p태그를 생성 result1번에 추가 <br>
+			ptag = $("&lt;p id='p1' onclick='proc1(this)'&gt;Hello&lt;/p&gt;")<br>
+			&nbsp;&nbsp;$("#result1").append(ptag);<br>
+			<br>
+			function proc1(tt){<br>
+			&nbsp;&nbsp;$(tt).css("font-size", "+=5px");<br>
+			}<br>
+			<br>
+			<input type="button" value="확인">
+			<div id="result1"></div>
+		</div>
+		 
+		<div class="box box2">
+			<h3>새로운 태그 생성</h3>
+			확인 버튼 클릭하면 p태그를 생성 result2번에 추가 <br>
+			$(".box2 input[type=button]").on("click", function(){<br>
+			&nbsp;&nbsp;ptag = $("&lt;p&gt;&lt;/p&gt;", {<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;'id' : 'p2',<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;'text' : 'Hello',<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;'click' : function(){<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;$(this).css("font-size","+=5px");<br>							
+			&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+			&nbsp;&nbsp;});<br>
+			&nbsp;&nbsp;$("#result2").append(ptag);<br>
+				})<br>
+			<input type="button" value="확인">
+			<div id="result2"></div>
+		</div>
+		
+		<div class="box box3">
+			<h3>새로운 태그 생성</h3>
+			이미지추가 버튼 클릭하면 img태그를 생성 result3번에 추가 <br>
+			이미지를 클릭하면 이미지의 테두리 설정<br>
+			<input type="button" value="이미지추가">
+			<div id="result3"></div>
+		</div>
+		 
+	</body>
+</html>

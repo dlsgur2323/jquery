@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="../css/public.css" rel="stylesheet">
+		<script src="../js/jquery-3.5.1.min.js"></script>
+		<script>
+			$(function(){
+				$("#ajget").on("click", function(){
+					vname = $("#name3").val();
+					vid = $("#id3").val();
+					$.ajax({
+						url : "ajget.jsp",
+						type : "get",
+						//data : "name=" + vname + "&id=" + vid,
+						data : { "name" : vname,
+								 "id" : vid	
+								},
+						success : function(res){
+							$("#result3").html(res);
+						},
+						error : function(req){
+							alert("상태 : " + req.status);
+						},
+						dataType : "text"
+					})
+				})
+				
+				$("#ajpost").on("click", function(){
+					vname = $("#name4").val();
+					vid = $("#id4").val();
+					$.ajax({
+						url : "ajpost.jsp",
+						method : "post",
+						//data : "name=" + vname + "&id=" + vid,
+						data : { "name" : vname,
+								 "id" : vid	
+								},
+						dataType : "text",
+						success : function(res){
+							$("#result4").html(res);
+						},
+						error : function(req){
+							alert("상태 : " + req.status);
+						}
+					})
+				})
+				
+			})
+		</script>
+	</head>
+	<body>
+		
+		<div class="box">
+			<h3>ajax방식 - get/post</h3>
+			응답 데이터를 현재 페이지의 영억에 출력한다.<br>
+			응답 페이지를 전체 페이지로 로드하지 않는다.
+			<form id="form3">
+				이름 <input type="text" name="name3" id="name3"><br>
+				아이디 <input type="text" name="id3" id="id3"><br>
+				<input type="button" id="ajget" value="get전송">
+			</form>
+			<div id="result3"></div>
+			<br>
+			<form id="form4">
+				이름 <input type="text" name="name4" id="name4"><br>
+				아이디 <input type="text" name="id4" id="id4"><br>
+				<input type="button" id="ajpost" value="post전송">
+			</form>
+			<div id="result4"></div>
+		</div> 
+		
+	</body>
+</html>

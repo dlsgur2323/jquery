@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="../css/public.css" rel="stylesheet">
+		<script src="../js/jquery-3.5.1.min.js"></script>
+		<script>
+			$(function(){
+				idx = 0;
+				$(".box1 .but").on("click", function(){
+					//새로운 버튼을 생성한다.
+					idx++
+					$("<button></button>", {
+						"class" : "but",
+						"text" : "새로운 버튼" + idx
+						}).appendTo("#result2");
+					
+				})
+				
+				$("#clear1").on("click", function(){
+					$(".box1 .but").off("click");
+				})
+				
+				$("#clear2").on("click", function(){
+// 					$(document).off("click", ".box2 .but");
+					$(".box2 div").off("click", ".but");
+				})
+
+				idx2 = 0;
+				$(".box2 div").on("click", ".but", function(){
+// 				$(document).on("click", ".box2 .but", function(){
+					idx2++
+					$("<button></button>", {
+						"class" : "but",
+						"text" : "새로운 버튼" + idx2
+						}).appendTo("#result4");
+					
+				})
+				
+				
+			})
+		</script>
+	</head>
+	<body>
+		
+		<div class="box box1">
+			<h3>이벤트 연결 - bind</h3>
+			$("선택자").on(이벤트 이름 , fn)<br>
+			$("선택자").bind(이벤트 이름, fn)<br>
+			$("선택자").이벤트이름(fn)<br>
+			<div id="result1">
+				<button class="but">버튼1</button>
+				<button class="but">버튼2</button>
+				<button class="but">버튼3</button>
+			</div>
+		
+			<input id="clear1" type="button" value="해제">
+		
+			<div id="result2">
+			
+			</div>
+			
+		</div>
+		 
+		<div class="box box2">
+			<h3>이벤트 연결 - delegate</h3>
+			$(document).delegate("선택자", 이벤트명, function);<br>
+			$(document).on(이벤트명, 선택자, fn);<br>
+			실행 후에 동적으로 생성되는 요소에 이벤트 핸들러를 미리 등록한다.<br>
+			<div id="result3">
+				<button class="but">버튼1</button>
+				<button class="but">버튼2</button>
+				<button class="but">버튼3</button>
+			</div>
+		
+			<input id="clear2" type="button" value="해제">
+		
+			<div id="result4">
+			
+			</div>
+			
+		</div> 
+		
+	</body>
+</html>

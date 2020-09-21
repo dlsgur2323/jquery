@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="../css/public.css" rel="stylesheet">
+		<script src="../js/jquery-3.5.1.min.js"></script>
+		<script>
+			$(function(){
+				$(".box1 p").on("click", function(){
+					
+					name = $(this).attr("title");
+// 					vimg = $('<img src="../images/' +name+ '.jpg" width="100px" height="100px">')
+					vimg = $("<img>", {
+										'src'	: "../images/"+name+".jpg",						
+										"width" : "100px",
+										"height" : "100px"
+										})
+					
+// 					$(vimg).appendTo($(this));
+					$(this).prepend(vimg);
+					
+					
+				})
+										
+				$(".box2 p").on("click", function(){
+					
+					name = $(this).attr("title");
+// 					vimg = $('<img src="../images/' +name+ '.jpg" width="100px" height="100px">')
+					vimg = $("<img>", {
+										'src'	: "../images/"+name+".jpg",						
+										"width" : "100px",
+										"height" : "100px"
+										})
+					
+// 					$(this).after(vimg);
+					$(vimg).insertAfter(this);
+// 					$(this).before(vimg);
+// 					$(vimg).insertBefore(this);
+					
+				})
+				
+				$(".box3 input[value=확인]").on("click", function(){
+					$(this).hide();
+					$("#stop").show();
+					a = setInterval(function(){
+						$(".box3 img:first").appendTo(".box3");
+						
+					}, 1)
+					
+					// 확인 버튼 사용 불가능 또는 감추기
+					
+				})
+				
+				$("#stop").on("click", function(){
+					$(this).hide();
+					$("#start").show();
+					clearInterval(a);
+				})
+				
+				
+				
+			})
+		</script>
+		<style>
+			.box3 img {
+				width : 100px;
+				height : 100px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="box box1">
+			<h3>이미지추가 - append/prepend</h3>
+			$('selector').append(내용content), $(content).appendTo(selector)<br>
+			prepend(내용content), prependTo(selector)<br>
+			
+			<p title="Penguins">펭귄</p>
+			<p title="Chrysanthemum">국화</p>
+			<p title="Koala">코알라</p>
+			<p title="Hydrangeas">수국</p>
+	
+		</div>
+		 
+		<div class="box box2">
+			<h3>이미지추가 - before/after</h3>
+			after, insertAfter<br>
+			before, insertBefore<br>
+			
+			<p title="Penguins">펭귄</p>
+			<p title="Chrysanthemum">국화</p>
+			<p title="Koala">코알라</p>
+			<p title="Hydrangeas">수국</p>
+		</div>
+		 
+		<div class="box box3">.
+			<h3>이미지이동</h3>
+			기존의 document에 생성되어 있는 요소를 대상으로 추가하면 기존의 요소가 이동이 된다. <br>
+			<input id="start" type="button" value="확인">
+			<input id="stop" type="button" value="종료"><br>
+			<img src="../images/단풍.jpg">	
+			<img src="../images/등대.jpg">	
+			<img src="../images/셔틀콕.jpg">	
+			<img src="../images/산.png">	
+			<img src="../images/수국.jpg">	
+		</div> 
+		
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

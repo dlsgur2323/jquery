@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="../css/public.css" rel="stylesheet">
+		<script src="../js/jquery-3.5.1.min.js"></script>
+		<script>
+			$(function(){
+				$("input:button").on("click", function(){
+					$.ajax({
+						url : "member.jsp",
+						type : "get",
+						dataType : "json",
+						success : function(res){
+							code = "<table border='1'><tr><td>아이디</td>";
+							code += "<td>이름</td>"
+							code += "<td>주소</td>"
+							code += "<td>전화번호</td>"
+							code += "<td>이메일</td></tr>"
+							$.each(res,function(i){
+								code += "<tr>"
+								code += "<td>" + res[i].id +"</td>"
+								code += "<td>" + res[i].name +"</td>"
+								code += "<td>" + res[i].addr +"</td>"
+								code += "<td>" + res[i].hp +"</td>"
+								code += "<td>" + res[i].mail +"</td>"
+								code += "</tr>"
+							})
+							code += "</table>"
+							$("#result1").html(code);
+						},
+						error : function(req){
+							alert("상태 : " + req.status);
+						}
+					})
+				})
+			})
+		</script>
+	</head>
+	<body>
+		
+		<div class="box">
+			<h3>타이틀</h3>
+			<input type="button" value="멤버리스트">
+			<div id="result1"></div>
+		</div>
+		
+	</body>
+</html>
