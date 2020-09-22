@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="../css/public.css" rel="stylesheet">
+		<script src="../js/jquery-3.5.1.min.js"></script>
+		<script>
+			$(function(){
+				$("#lprod").on("change", function(){
+					$.post(
+						"prod.jsp",
+						{"gu" : $(this).val()},
+						function(res){
+							code = "";
+							$.each(res, function(i){
+								code += "<option value='"+ res[i].id +"'>"+ res[i].name +"</option>";
+							})
+							if(code == ""){
+								$("#detail").empty();
+								$("<img>" , {
+										"src" : "../images/spongebob.png",
+										"width" : "150px",
+										"height" : "150px"
+								}).appendTo("#detail")
+								$("#prod").html(code);
+							} else {
+								$("#prod").html(code);
+								$("#prod").trigger("change");
+							}
+						},
+						"json"
+					)
+					
+				})
+				
+				$.getJSON(
+					"/jqpro/0921/lprod.jsp",
+					function(res){
+						code = "";
+						$.each(res, function(i){
+							code += "<option value='"+ res[i].gu +"'>"+ res[i].nm +"</option>";
+						})
+						$("#lprod").html(code);
+						$("#lprod").trigger("change");
+					}
+				)
+				
+				$("#prod").on("change", function(){
+					$.getJSON(
+						"prodDetail.jsp",
+						{"id" : $(this).val()},
+						function(res){
+							code = "<table id='d2' border='1'>";
+							code += "<tr><td>항목</td><td>내용</td></tr>";
+							code += "<tr><td>PROD_ID</td><td>"+ res.id +"</td></tr>";
+							code += "<tr><td>PROD_NAME</td><td>"+ res.name +"</td></tr>";
+							code += "<tr><td>PROD_LGU</td><td>"+ res.lgu +"</td></tr>";
+							code += "<tr><td>PROD_BUYER</td><td>"+ res.buyer +"</td></tr>";
+							code += "<tr><td>PROD_COST</td><td>"+ res.cost +"</td></tr>";
+							code += "<tr><td>PROD_PRICE</td><td>"+ res.price +"</td></tr>";
+							code += "<tr><td>PROD_SALE</td><td>"+ res.sale +"</td></tr>";
+							code += "<tr><td>PROD_OUTLINE</td><td>"+ res.outline +"</td></tr>";
+							code += "<tr><td>PROD_DETAIL</td><td>"+ res.detail +"</td></tr>";
+							code += "</table>";
+							
+							$("#detail").html(code);
+						}
+					)
+					
+				})
+				
+				
+			})
+		</script>
+	</head>
+	<body>
+		
+		<div class="box">
+			<h3>제품분류리스트</h3>
+			lprod 테이블의 lprod_gu, lprod_nm을 조회<br>
+			lprod의 검색 결과 중 하나를 선택 하면 prod 테이블의 prod_id, prod_name을 조회<br>
+			prod테이블 조회시 조건은 prod_lgu = lprod_gu 이다.<br>
+			prod의 조회 결과 중 하나를 선택하면 선택항목의 상세보기를 조회한다.<br>
+			조회 시 검색 조건은 prod_id = 선택한 항목의 id<br>
+			<select id="lprod">
+			
+			</select>
+			
+			<select id="prod">
+			
+			</select>
+			
+			<div id="detail">
+			
+			</div>
+		</div> 
+		
+	</body>
+</html>
