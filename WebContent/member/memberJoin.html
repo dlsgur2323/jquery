@@ -9,11 +9,101 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		
+		
 <!-- 		<script src="../js/jquery-3.5.1.min.js"></script> -->
 		<link href="../css/public.css" rel="stylesheet">
+		<script src="../js/memberreg.js"></script>
+		<script src="../js/jquery.serializejson.min.js"></script>
 		
 		<script>
 			$(function(){
+				
+				// 아이디 중복체크
+				$("#btnid").on("click",function(){
+// 					idval = $("#id").val().trim();
+					if(idval.length < 1){
+						$("#spid").empty();
+						alert("아이디를 입력하세요");
+						return;
+					}
+					$.ajax({
+						url : "/jqpro/CheckById",
+						type : "get",
+						data : { "id" : idval },
+						success : function(res){
+							$("#spid").html(res.sw).css("color", "red");
+						},
+						error : function(req){
+							alert(req.status);
+						},
+						dataType : "json"
+					})
+					
+				})
+				
+				// 번호검색
+				$("#btnzip").on("click", function(){
+// 					window.open("zip.html", "우편번호찾기", "width=500 height=400")
+					$("#myModal").modal("show");
+				})
+				
+				// 가입신청
+				$("#btnjoin").on("click", function(){
+					// 입력한 모든 값을 가져온다.
+// 					$("#form").serializeJSON()
+					
+					$.ajax({
+						url : "/jqpro/insert.do",
+						type : "post",
+						data :$("#form").serializeArray(),
+						success : function(res){
+							$("#btnreset").hide();
+							$("#spjoin").html(res.sw).css("color", "red");
+						},
+						error : function(req){
+							alert("상태 : " + req.status);
+						},
+						dataType : "json"
+						
+					})
+					
+				})
+				
+				// 주소찾기 모달 창
+				$('#btndong').on('click', function(){
+					dongvalue = $('#dong').val().trim();
+					$("#myModal").show();
+					
+					$.ajax({
+						url : '/jqpro/SelectByDong.do',  //서블릿 이름
+						type : 'post',
+						data : {'dong' : dongvalue},
+						success : function(res){
+							$("#result1").html(res);
+						},
+						error : function(req){
+							alert("상태 : " + req.status + "\n 메세지 : " + req.statusText)
+						},
+						dataType : 'html'
+						
+					})
+				})
+				
+				$("#result1").on("click", ".ziptr", function(){
+					zip = $('td:eq(0)',this).text()
+					addr = $('td:eq(1)',this).text()
+					
+					$("#zip").val(zip)
+					$("#add1").val(addr)
+					$("#myModal").modal("hide");
+				})
+				
+				// 모달창이 닫힐때 입력/출력 된 결과값을 지운다.
+				$("#myModal").on("hide.bs.modal",function(){
+					$("#result1").empty();
+					$("#dong").val("");
+				})
+				
 				
 			})
 		</script>
@@ -24,70 +114,121 @@
 		
 			<div class="container">
 				<h2>회원가입</h2>
-				<form class="form-horizontal">
+				<form class="form-horizontal" id="form">
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="id">아이디:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="id" placeholder="Enter id" name="mem_id">
+						<label class="control-label col-sm-2" for="id">아이디:<div class="msg" id="idmsg"></div></label>
+						
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="id"  name="mem_id">
 						</div>
+						<button id="btnid" type="button" class="btn btn-danger btn-sm">중복검사</button>
+						<span id="spid"></span>
+						<span class="sp"></span>
+						
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="name">이름:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="name" placeholder="Enter name" name="mem_name">
+						<label class="control-label col-sm-2" for="name">이름:<div class="msg" id="namemsg"></div></label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="name" name="mem_name" >
 						</div>
+						<span class="sp"></span>
+						
 					</div>
+						
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="bir">생년월일:</label>
-						<div class="col-sm-10">
+						<label class="control-label col-sm-2" for="bir">생년월일:<div class="msg" id="birmsg"></div></label>
+						<div class="col-sm-4">
 							<input type="date" class="form-control" id="bir" name="mem_bir">
 						</div>
+						<span class="sp"></span>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="pwd">비밀번호:</label>
-						<div class="col-sm-10">
-							<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="mem_pass">
+						<label class="control-label col-sm-2" for="pwd">비밀번호:<div class="msg" id="passmsg"></div></label>
+						<div class="col-sm-4">
+							<input type="password" class="form-control" id="pwd"  name="mem_pass">
 						</div>
+						<span class="sp"></span>
+						
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="email">이메일:</label>
-						<div class="col-sm-10">
-							<input type="email" class="form-control" id="email" placeholder="Enter email" name="mem_mail">
+						<label class="control-label col-sm-2" for="pwd2">비밀번호 확인:<div class="msg" id="pass2msg"></div></label>
+						<div class="col-sm-4">
+							<input type="password" class="form-control" id="pwd2"  name="mem_pass2">
 						</div>
+						<span class="sp"></span>
+						
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="ph">휴대폰 번호:</label>
-						<div class="col-sm-10">
-							<input type="tel" class="form-control" id="ph" placeholder="Enter ph" name="mem_ph">
+						<label class="control-label col-sm-2" for="email">이메일:<div class="msg" id="mailmsg"></div></label>
+						<div class="col-sm-4">
+							<input type="email" class="form-control" id="email"  name="mem_mail">
 						</div>
+						<span class="sp"></span>
+						
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="hp">휴대폰 번호:<div class="msg" id="hpmsg"></div></label>
+						<div class="col-sm-4">
+							<input type="tel" class="form-control" id="hp"  name="mem_hp">
+						</div>
+						<span class="sp"></span>
+						
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="zip">우편번호:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="zip" name="mem_zip">
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="zip" readonly name="mem_zip">
 						</div>
+						<button type="button" id="btnzip" class="btn btn-danger btn-sm">번호검색</button>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="add1">주소:</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="add1" name="mem_add1">
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="add1" readonly name="mem_add1">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="add2">상세주소:</label>
-						<div class="col-sm-10">
+						<div class="col-sm-6">
 							<input type="text" class="form-control" id="add2" name="mem_add2">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default">Submit</button>
+							<button id="btnjoin" type="button" class="btn btn-primary btn-lg">submit</button>
+							<span id="spjoin"></span>
+							<button id="btnreset" type="reset" class="btn btn-default btn-lg">reset</button>
 						</div>
 					</div>
 				</form>
 			</div>
 			
-		</div> 
-		
+		</div>
+
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-lg">
+	
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">우편번호 검색</h4>
+					</div>
+					<div class="modal-body">
+						<h3>우편번호 찾기</h3>
+						찾는 동 이름을 입력
+						<br>
+						<input type="text" id="dong">
+						<input id="btndong" type="button" value="확인">
+						<div id="result1"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	
 	</body>
 </html>

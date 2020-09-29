@@ -18,7 +18,7 @@
 	</insert>
 	
 	<select id="selectByDong" parameterClass="String" resultClass="zipVo">
-		SELECT * FROM ZIPTB WHERE LIKE #dong#||'%'
+		SELECT * FROM ZIPTB WHERE DONG LIKE #dong#||'%'
 	</select>
 	
 </sqlMap>

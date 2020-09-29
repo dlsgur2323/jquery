@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<link href="../css/public.css" rel="stylesheet">
+		<script src="../js/jquery-3.5.1.min.js"></script>
+		
+		<style>
+			.box{
+				font-size : 1.2em;
+			}
+			
+			.box input[type=button]{
+				background-color : blue;
+				color : white; 
+				padding : 2px 5px;
+				width : 100px;
+				height : 40px;
+				border-radius : 50px;
+				margin : 5px; 
+				/* font-size : 1.2em; */	
+			}
+			
+  		</style>
+  		
+		<script>
+			$(function(){
+				$('#btndong').on('click', function(){
+					dongvalue = $('#dong').val().trim();
+					
+					$.ajax({
+						url : '/jqpro/SelectByDong.do',  //서블릿 이름
+						type : 'post',
+						data : {'dong' : dongvalue},
+						success : function(res){
+							$("#result1").html(res);
+						},
+						error : function(req){
+							alert("상태 : " + req.status + "\n 메세지 : " + req.statusText)
+						},
+						dataType : 'html'
+						
+					})
+				})
+				
+				$("#result1").on("click", ".ziptr", function(){
+					zip = $('td:eq(0)',this).text()
+					addr = $('td:eq(1)',this).text()
+					
+					$("#zip", opener.document).val(zip)
+					$("#add1", opener.document).val(addr)
+					window.close()
+				})
+			})
+		</script>
+	</head>
+	<body>
+		
+		<div class="box">
+			<h3>우편번호 찾기</h3>
+			찾는 동 이름을 입력
+			<br>
+			<input type="text" id="dong">
+			<input type="button" value="확인">
+			<div id="result1"></div>
+		</div>
+	</body>
+</html>

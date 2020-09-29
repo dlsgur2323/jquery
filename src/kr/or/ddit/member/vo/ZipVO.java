@@ -1,42 +1,43 @@
 package kr.or.ddit.member.vo;
 
 public class ZipVO {
-	private String ZIPCODE;
-	private String SIDO   ;
-	private String GUGUN  ;
-	private String DONG   ;
-	private String BUNJI  ;
+	private String zipcode;
+	private String sido   ;
+	private String gugun  ;
+	private String dong   ;
+	private String bunji  ;
 	
-	public String getZIPCODE() {
-		return ZIPCODE;
+	public String getZipcode() {
+		return zipcode;
 	}
-	public void setZIPCODE(String zIPCODE) {
-		ZIPCODE = zIPCODE;
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
-	public String getSIDO() {
-		return SIDO;
+	public String getSido() {
+		return sido;
 	}
-	public void setSIDO(String sIDO) {
-		SIDO = sIDO;
+	public void setSido(String sido) {
+		this.sido = sido;
 	}
-	public String getGUGUN() {
-		return GUGUN;
+	public String getGugun() {
+		return gugun;
 	}
-	public void setGUGUN(String gUGUN) {
-		GUGUN = gUGUN;
+	public void setGugun(String gugun) {
+		this.gugun = gugun;
 	}
-	public String getDONG() {
-		return DONG;
+	public String getDong() {
+		return dong;
 	}
-	public void setDONG(String dONG) {
-		DONG = dONG;
+	public void setDong(String dong) {
+		this.dong = dong;
 	}
-	public String getBUNJI() {
-		return BUNJI;
+	public String getBunji() {
+		return bunji;
 	}
-	public void setBUNJI(String bUNJI) {
-		BUNJI = bUNJI;
+	public void setBunji(String bunji) {
+		this.bunji = bunji;
 	}
+	
 	
 	
 	
